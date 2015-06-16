@@ -1,0 +1,21 @@
+#Script to print the username, server, and path for scp or rsync
+
+server=grid.wayne.edu
+
+if [[ "$1" == *"-h"* ]]; then
+  echo ""
+  echo "Prints the path to a directory and/or file in the working directory."
+  echo "The path includes the username and server for scp or rsync"
+  echo ""
+  echo "Usage:"
+  echo "       SCPpath"
+  echo "       SCPpath <directory>"
+  echo "       SCPpath <directory/filemame>"
+  echo ""
+else
+  scpuser=$(whoami)
+  dirpath=$(pwd)
+  fullpath=${scpuser}@${server}:${dirpath}
+  fullpath=${fullpath}/${1}
+  echo ${fullpath}
+fi
