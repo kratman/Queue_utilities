@@ -1,3 +1,26 @@
+#Introduction
+
 This repository contains a set of queue utility scripts for the cisneros
 research group.
 
+#Scripts
+
+Qtop: A queue utility similar to pbstop. It will repeatedly refresh a list of
+submitted jobs on a queue or for a user. It will also replace usernames with
+real names.
+
+user:$ Qtop -q <queue name>
+user:$ Qtop -r <user name>
+user:$ Qtop -u <user name>
+user:$ Qtop -u me
+
+ -q show jobs on a queue
+ -r show running jobs for a user
+ -u show all jobs for a user, 'me' is shorthand for the current user
+
+MyQueue: A script to print a list of running and queued jobs for the current
+user.
+
+SCPpath: A script to print the username, server, and path for scp or rsync.
+
+user:$ SCPpath <optional, path/file>
