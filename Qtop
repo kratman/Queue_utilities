@@ -9,7 +9,7 @@
 
 #Read list of usernames from the file defined in ${QtopUsers}
 UsersedLine = ""
-source ${QtopUsers}
+source ${QtopUserNames}
 
 #Help mode
 if [[ "$1" == *"-h"* ]]; then
