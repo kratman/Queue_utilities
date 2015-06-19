@@ -1,6 +1,10 @@
 #!/bin/bash
 
+#A script to print all jobs for the current user
+
+#Find username
 MyUName=$(whoami)
+#Alter qstat output
 qstat -u ${MyUName} \
   | sed 's/\.vpbs1//g' \
   | sed 's/Job ID         /Job ID   /g' \

@@ -1,7 +1,11 @@
+#!/bin/bash
+
 #Script to print the username, server, and path for scp or rsync
 
+#Set server name
 server=grid.wayne.edu
 
+#Help mode
 if [[ "$1" == *"-h"* ]]; then
   echo ""
   echo "Prints the path to a directory and/or file in the working directory."
@@ -12,10 +16,12 @@ if [[ "$1" == *"-h"* ]]; then
   echo "       SCPpath <directory>"
   echo "       SCPpath <directory/filemame>"
   echo ""
-else
-  scpuser=$(whoami)
-  dirpath=$(pwd)
-  fullpath=${scpuser}@${server}:${dirpath}
-  fullpath=${fullpath}/${1}
-  echo ${fullpath}
+  exit
 fi
+
+#Print path
+scpuser=$(whoami)
+dirpath=$(pwd)
+fullpath=${scpuser}@${server}:${dirpath}
+fullpath=${fullpath}/${1}
+echo ${fullpath}
