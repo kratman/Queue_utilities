@@ -7,21 +7,9 @@
 #Usage: Qtop -u [ username ]
 #Usage: Qtop -r [ username ]
 
-#Define sed command for known usernames
-UsersedLine=""
-#Add usernames (first one should not have a ; character
-UsersedLine=${UsersedLine}"s/ft0805/Kratz /g"
-UsersedLine=${UsersedLine}";s/fc1875/Hedi  /g"
-UsersedLine=${UsersedLine}";s/ee4522/Andres/g"
-UsersedLine=${UsersedLine}";s/fg3012/Alice /g"
-UsersedLine=${UsersedLine}";s/fj9636/Tu    /g"
-UsersedLine=${UsersedLine}";s/fc3161/Bishnu/g"
-UsersedLine=${UsersedLine}";s/fh0764/Pascal/g"
-UsersedLine=${UsersedLine}";s/fn9787/Joseph/g"
-UsersedLine=${UsersedLine}";s/at8036 /Aragorn/g"
-UsersedLine=${UsersedLine}";s/es4448/Pavel /g"
-#Add server tag
-UsersedLine=${UsersedLine}";s/\.vpbs1//g"
+#Read list of usernames from the file defined in ${QtopUsers}
+UsersedLine = ""
+source ${QtopUsers}
 
 #Help mode
 if [[ "$1" == *"-h"* ]]; then

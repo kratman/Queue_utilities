@@ -7,7 +7,8 @@ research group.
 
 Qtop: A queue utility similar to pbstop. It will repeatedly refresh a list of
 submitted jobs on a queue or for a user. It will also replace usernames with
-real names.
+real names. A usernames file should be referenced by the a ${QtopUsers}
+environment variable.
 
 user:$ Qtop -q <queue name>
 user:$ Qtop -r <user name>

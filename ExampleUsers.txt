@@ -1,0 +1,7 @@
+#Define sed command for known usernames
+UsersedLine=""
+#Add usernames (first one should not have a ; character
+UsersedLine=${UsersedLine}"s/ab1234/Alice /g"
+UsersedLine=${UsersedLine}";s/cd5678/Bob  /g"
+#Add server tag
+UsersedLine=${UsersedLine}";s/\.vpbs1//g"
