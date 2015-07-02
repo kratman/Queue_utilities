@@ -21,8 +21,10 @@ user:$ Qtop --help
  -u => show all jobs for a user, 'me' is shorthand for the current user
  --help, -h => print full help
 
+Press "q" to exit Qtop.
+
 + MyQueue: A script to print a list of running and queued jobs for the current
-user.
+user. The output is essentially the same as Qtop.
 
 user:$ MyQueue
 

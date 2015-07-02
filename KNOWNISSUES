@@ -1,0 +1,6 @@
+Qtop:
+-The quit command sometimes takes a second to register and typing "q" during
+a refresh does not quit the software. This is due to the 2 second windows I
+used to check for characters.
+-Qtop is not as pretty or efficient as pbstop, but it was designed for
+systems that lack common tools.
