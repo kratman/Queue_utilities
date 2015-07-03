@@ -1,13 +1,10 @@
-#!/bin/python
+#!/bin/bash
 
 #A script to print all jobs for the current user
 
-### Import modules ###
-
-### Find username ###
+#Find username
 MyUName=$(whoami)
-
-### Alter qstat output ###
+#Alter qstat output
 qstat -u ${MyUName} \
   | sed 's/\.vpbs1//g' \
   | sed 's/Job ID         /Job ID   /g' \
