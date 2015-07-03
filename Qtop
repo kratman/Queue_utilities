@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ###############################################################################
-# A simple script to produce a constantly updating queue t.o.p.               #
+# A simple program to produce a constantly updating queue t.o.p.              #
 # This is a simplified and specialized version of pbstop                      #
 ###############################################################################
 
@@ -10,16 +10,107 @@
 #Usage: Qtop -r [ username ]
 
 ### Import modules ###
-import os
+import subprocess
+import sys
 import re
+import os
 
-### Read list of usernames from the file defined in ${QtopUsers} ###
+### Read list of usernames from the file defined in ${QtopUserNames} ###
+QtopUserFile = subprocess.check_output("echo ${QtopUserNames}",shell=True)
+QtopUserFile = QtopUserFile.strip()
+UserList = []
+ServerTag = ""
+if (len(QtopUserFile) > 1):
+  if (os.path.isfile(QtopUserFile)):
+    ifile = open(QtopUserFile,"r")
+    dummy = ifile.readlines()
+    for i in range(len(dummy)):
+      dummy[i] = dummy[i].split()
+      if (dummy[i][0] == "Server:"):
+        ServerTag = dummy[i][1]
+      else:
+        UserList.append(dummy[i])
 
+### Resize the usernames ###
+for pair in UserList:
+  if (len(pair[0]) < len(pair[1])):
+    diff = len(pair[1])-len(pair[0])
+    for i in range(diff):
+      pair[0] += " "
+  if (len(pair[0]) > len(pair[1])):
+    diff = len(pair[0])-len(pair[1])
+    for i in range(diff):
+      pair[1] += " "
 
 ### Read arguments ###
+RunType = ""
+if (len(sys.argv) == 2):
+  RunArgs = sys.argv[1]
+  if (RunArgs > 1):
+    if ((RunArgs == "-h") or (RunArgs == "--help")):
+      RunType = "hlp"
+if (len(sys.argv) == 3):
+  RunArgs = sys.argv[1]
+  if (RunArgs > 1):
+    if ((RunArgs[0] == "-") and (RunArgs[1] == "h")):
+      RunType = "hlp"
+    if ((RunArgs[0] == "-") and (RunArgs[1] == "u")):
+      RunType = "usr"
+    if ((RunArgs[0] == "-") and (RunArgs[1] == "r")):
+      RunType = "run"
+    if ((RunArgs[0] == "-") and (RunArgs[1] == "q")):
+      RunType = "que"
+  RunArgs = sys.argv[2]
+  if ((RunType == "usr") or (RunType == "run")):
+    QtopUser = RunArgs
+    QtopUser = QtopUser.strip()
+    if (RunArgs == "me"):
+      QtopUser = subprocess.check_output('whoami')
+      QtopUser = QtopUser.strip()
+  if (RunType == "que"):
+    QueName = RunArgs
 
 
-### Semi-infinite loop ###
+### Print help info and exit ###
+if (RunType == "hlp"):
+  print("")
+  print("A simple script to produce a constantly updating queue t.o.p.")
+  print("")
+  print("Usage: Qtop -q [ queue name ]")
+  print("Usage: Qtop -r [ username ]")
+  print("Usage: Qtop -u [ username ]")
+  print("Usage: Qtop -u me")
+  print("")
+  print("")
+  print("  -q  Show active and queued jobs for a queue")
+  print("")
+  print("  -u  Show active and queued jobs for a user. Jobs for the")
+  print("      current user can be shown with the '-u me' command.")
+  print("")
+  print("  -r  Show only active jobs for a user.")
+  print("")
+  print("The script runs until the user presses 'q'")
+  print("")
+  print("Note: Behavior when refreshing the screen is terminal dependent.")
+  print("")
+  exit()
+
+### Semi-infinite user loop ###
+if ((RunType == "usr") or (RunType == "run")):
+  exit()
+
+
+### Semi-infinite queue loop ###
+if (RunType == "que"):
+  exit()
 
 
 ### Exit if no valid input was found ###
+print("")
+print("Usage: Qtop -q [ queue name ]")
+print("Usage: Qtop -u [ username name ]")
+print("Usage: Qtop -r [ username name ]")
+print("")
+print("Use -h for more detailed help.")
+print("")
+exit()

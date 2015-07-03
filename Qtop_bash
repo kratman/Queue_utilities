@@ -7,7 +7,7 @@
 #Usage: Qtop -u [ username ]
 #Usage: Qtop -r [ username ]
 
-#Read list of usernames from the file defined in ${QtopUsers}
+#Read list of usernames from the file defined in ${QtopUserNames}
 UsersedLine = ""
 source ${QtopUserNames}
 
