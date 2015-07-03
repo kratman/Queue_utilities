@@ -1,15 +1,40 @@
-#!/bin/python
+#!/usr/bin/python
 
-#A script to print all jobs for the current user
+###############################################################################
+# A script to print all jobs for the current user                             #
+###############################################################################
 
 ### Import modules ###
+import subprocess
+import re
+
+### Set server information ###
+ServTag = "vpbs1"
 
 ### Find username ###
-MyUName=$(whoami)
+MyUName = subprocess.check_output('whoami')
+MyUName = MyUName.strip()
+
+### Clear screen and print a blank line ###
+#NB: Calls to clear and reset are slow, ~90% of the run time
+subprocess.call('clear')
+subprocess.call('reset')
+print("")
+
+### Call qstat ###
+jobcmd = "qstat -u "+MyUName
+JobOut = subprocess.check_output(jobcmd,shell=True)
 
 ### Alter qstat output ###
-qstat -u ${MyUName} \
-  | sed 's/\.vpbs1//g' \
-  | sed 's/Job ID         /Job ID   /g' \
-  | sed 's/---------------/---------/g' \
-  | sed 's/              Req/        Req/g' | sed '/vpbs1/d'
+JobOut = JobOut.strip()
+JobOut = JobOut.split('\n')
+for line in JobOut:
+  if (line.strip() != (ServTag+':')):
+    line = re.sub(r'\.vpbs1 ',r' ',line)
+    line = re.sub(r'Job ID         ',r'Job ID   ',line)
+    line = re.sub(r'---------------',r'---------',line)
+    line = re.sub(r'              Req',r'        Req',line)
+    print(line)
+
+### Clean up and exit ###
+print("")
