@@ -15,10 +15,7 @@ ServTag = "vpbs1"
 MyUName = subprocess.check_output('whoami')
 MyUName = MyUName.strip()
 
-### Clear screen and print a blank line ###
-#NB: Calls to clear and reset are slow, ~90% of the run time
-subprocess.call('clear')
-subprocess.call('reset')
+### Print a blank line ###
 print("")
 
 ### Call qstat ###
