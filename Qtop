@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 ###############################################################################
 # A simple program to produce a constantly updating queue t.o.p.              #
@@ -11,6 +11,7 @@
 
 ### Import modules ###
 import subprocess
+import select
 import sys
 import re
 import os
@@ -97,7 +98,53 @@ if (RunType == "hlp"):
 
 ### Semi-infinite user loop ###
 if ((RunType == "usr") or (RunType == "run")):
-  exit()
+  while (True):
+    #Clear the screen
+    #NB: Several different types are included since the commands
+    #are terminal dependent
+    subprocess.call('clear')
+    subprocess.call('reset')
+    #Print title
+    line = '\n'
+    if (RunType == "usr"):
+      line += "Active and queued "
+    if (RunType == "run"):
+      line += "Active "
+    line += "jobs for user "
+    line += QtopUser
+    line += '\n'
+    #Print qstat titles that will be lost
+    line += "                                    "
+    line += "                  Req'd  Req'd   Elap"
+    line += '\n'
+    line += "Job ID    Username Queue    Jobname "
+    line += "   SessID NDS TSK Memory Time  S Time"
+    line += '\n'
+    line += "--------- -------- -------- --------"
+    line += "-- ------ --- --- ------ ----- - -----"
+    #Flush output
+    print(line)
+    #Call qstat
+    jobcmd = "qstat -u "
+    jobcmd += QtopUser
+    jobcmd += " | grep -e "
+    jobcmd += QtopUser
+    JobOut = subprocess.check_output(jobcmd,shell=True)
+    JobOut = JobOut.strip()
+    JobOut = JobOut.split('\n')
+    #Replace names
+    for line in JobOut:
+      line = line.strip()
+      for i in range(len(UserList)):
+        line = re.sub(UserList[0],UserList[1],line)
+        print(line)
+    #Check for quit commad
+    (o1,o2,o3) = select.select([sys.stdin],[],[],30)
+    if (o1):
+      quitline = sys.stdin.readline().strip()
+      for letter in quitline:
+        if (letter == "q"):
+          exit()
 
 
 ### Semi-infinite queue loop ###
