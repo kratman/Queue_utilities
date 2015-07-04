@@ -10,7 +10,8 @@ research groups.
 A queue utility similar to pbstop. It will repeatedly refresh a list of
 submitted jobs on a queue or for a user. It will also replace usernames with
 real names. A usernames file should be referenced by the a ${QtopUserNames}
-environment variable.
+environment variable. An example QtopUserNames file is included with the
+repository.
 
 ```
 user:$ Qtop -q [ queue name ]
@@ -27,6 +28,8 @@ user:$ Qtop --help
 Press "q" and "enter" to exit Qtop.
 ```
 
+NB: Python 2.7 or higher is required due to a change in the subprocess module.
+
 ### MyQueue
 
 A script to print a list of running and queued jobs for the current
@@ -35,6 +38,8 @@ user. The output is essentially the same as Qtop.
 ```
 user:$ MyQueue
 ```
+
+NB: Python 2.7 or higher is required due to a change in the subprocess module.
 
 ### SCPpath
 
