@@ -24,7 +24,7 @@ user:$ Qtop --help
  -u => show all jobs for a user, 'me' is shorthand for the current user
  --help, -h => print full help
 
-Press "q" to exit Qtop.
+Press "q" and "enter" to exit Qtop.
 ```
 
 ### MyQueue

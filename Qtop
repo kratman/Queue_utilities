@@ -28,17 +28,20 @@ if (len(QtopUserFile) > 1):
     for i in range(len(dummy)):
       dummy[i] = dummy[i].split()
       if (dummy[i][0] == "Server:"):
-        ServerTag = dummy[i][1]
+        #Sanitize the server tag
+        ServerTag = re.escape(dummy[i][1])
       else:
         UserList.append(dummy[i])
 
 ### Resize the usernames ###
 for pair in UserList:
   if (len(pair[0]) < len(pair[1])):
+    #Make username longer
     diff = len(pair[1])-len(pair[0])
     for i in range(diff):
       pair[0] += " "
   if (len(pair[0]) > len(pair[1])):
+    #Make real name longer
     diff = len(pair[0])-len(pair[1])
     for i in range(diff):
       pair[1] += " "
@@ -69,8 +72,8 @@ if (len(sys.argv) == 3):
       QtopUser = subprocess.check_output('whoami')
       QtopUser = QtopUser.strip()
   if (RunType == "que"):
-    QueName = RunArgs
-
+    #Read and sanitize the queue name
+    QueName = re.escape(RunArgs)
 
 ### Print help info and exit ###
 if (RunType == "hlp"):
@@ -104,6 +107,7 @@ if ((RunType == "usr") or (RunType == "run")):
     #are terminal dependent
     subprocess.call('clear')
     subprocess.call('reset')
+    subprocess.call(['echo','-en','\e[3J'])
     #Print title
     line = '\n'
     if (RunType == "usr"):
@@ -136,21 +140,69 @@ if ((RunType == "usr") or (RunType == "run")):
     for line in JobOut:
       line = line.strip()
       for i in range(len(UserList)):
-        line = re.sub(UserList[0],UserList[1],line)
-        print(line)
-    #Check for quit commad
+        line = re.sub((r''+ServerTag),(r''),line)
+        line = re.sub((r''+UserList[i][0]),(r''+UserList[i][1]),line)
+      print(line)
+    #Check for quit commad every 30 seconds
     (o1,o2,o3) = select.select([sys.stdin],[],[],30)
     if (o1):
+      #Read typed text
       quitline = sys.stdin.readline().strip()
       for letter in quitline:
         if (letter == "q"):
           exit()
 
-
 ### Semi-infinite queue loop ###
 if (RunType == "que"):
-  exit()
-
+  while (True):
+    #Clear the screen
+    #NB: Several different types are included since the commands
+    #are terminal dependent
+    subprocess.call('clear')
+    subprocess.call('reset')
+    subprocess.call(['echo','-en','\e[3J'])
+    #Print qstat information for the queue
+    print("")
+    jobcmd = "qstat -Q "
+    jobcmd += QueName
+    line = subprocess.check_output(jobcmd,shell=True)
+    #Print title
+    line += '\n'
+    line += "Active and queued jobs on "
+    line += QueName
+    line += '\n'
+    #Print qstat titles that will be lost
+    line += "                                    "
+    line += "                  Req'd  Req'd   Elap"
+    line += '\n'
+    line += "Job ID    Username Queue    Jobname "
+    line += "   SessID NDS TSK Memory Time  S Time"
+    line += '\n'
+    line += "--------- -------- -------- --------"
+    line += "-- ------ --- --- ------ ----- - -----"
+    #Flush output
+    print(line)
+    #Call qstat
+    jobcmd = "qstat -a | grep -e "
+    jobcmd += QueName
+    JobOut = subprocess.check_output(jobcmd,shell=True)
+    JobOut = JobOut.strip()
+    JobOut = JobOut.split('\n')
+    #Replace names
+    for line in JobOut:
+      line = line.strip()
+      for i in range(len(UserList)):
+        line = re.sub((r''+ServerTag),(r''),line)
+        line = re.sub((r''+UserList[i][0]),(r''+UserList[i][1]),line)
+      print(line)
+    #Check for quit commad every 30 seconds
+    (o1,o2,o3) = select.select([sys.stdin],[],[],30)
+    if (o1):
+      #Read typed text
+      quitline = sys.stdin.readline().strip()
+      for letter in quitline:
+        if (letter == "q"):
+          exit()
 
 ### Exit if no valid input was found ###
 print("")
