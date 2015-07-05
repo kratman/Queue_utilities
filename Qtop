@@ -18,12 +18,14 @@ import os
 
 ### Color settings ###
 class ClrSet:
+  #Unicode colors
   Norm = '\033[0m'
   Red = '\033[91m'
   Bold = '\033[1m'
   Green = '\033[92m'
   Blue = '\033[94m'
   Cyan = '\033[36m'
+  #Set colors
   Help = Red #Color for help output
   Queue = Blue #Color the queue name
   User = Bold+Green #Options for the current user
