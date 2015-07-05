@@ -19,10 +19,12 @@ import os
 ### Color settings ###
 class ClrSet:
   Norm = '\033[0m'
+  Red = '\033[91m'
   Bold = '\033[1m'
   Green = '\033[92m'
   Blue = '\033[94m'
   Cyan = '\033[36m'
+  Help = Red #Color for help output
   Queue = Blue #Color the queue name
   User = Bold+Green #Options for the current user
   Group = Cyan #Options for the people in ${QtopUserNames}
@@ -97,8 +99,8 @@ if (len(sys.argv) == 3):
 
 ### Print help info and exit ###
 if (RunType == "hlp"):
-  print("")
-  print("A simple script to produce a constantly updating queue t.o.p.")
+  print(ClrSet.Help)
+  print("A simple program to produce a constantly updating queue t.o.p.")
   print("")
   print("Usage: Qtop -q [ queue name ]")
   print("Usage: Qtop -r [ username ]")
@@ -113,10 +115,12 @@ if (RunType == "hlp"):
   print("")
   print("  -r  Show only active jobs for a user.")
   print("")
-  print("The script runs until the user presses 'q'")
+  print("Pressing enter refreshes the output.")
   print("")
-  print("Note: Behavior when refreshing the screen is terminal dependent.")
+  print("Qtop runs until the user presses 'q' then enter.")
   print("")
+  print("Note: Behavior can be terminal dependent.")
+  print(ClrSet.Reset)
   exit()
 
 ### Semi-infinite user loop ###

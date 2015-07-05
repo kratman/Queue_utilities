@@ -25,8 +25,8 @@ user:$ Qtop --help
  -u => show all jobs for a user, 'me' is shorthand for the current user
  --help, -h => print full help
 
-Press "q" and "enter" to exit Qtop.
-```
+Pressing "enter" refreshes the output and pressing "q" and "enter" exits Qtop.
+'''
 
 NB: Python 2.7 or higher is required due to a change in the subprocess module.
 
