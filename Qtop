@@ -16,6 +16,22 @@ import sys
 import re
 import os
 
+### Color settings ###
+class ClrSet:
+  Norm = '\033[0m'
+  Bold = '\033[1m'
+  Green = '\033[92m'
+  Blue = '\033[94m'
+  Cyan = '\033[36m'
+  Queue = Blue #Color the queue name
+  User = Bold+Green #Options for the current user
+  Group = Cyan #Options for the people in ${QtopUserNames}
+  Reset = Norm #Reset to defaults
+
+### Find current users ID ###
+MyUName = subprocess.check_output('whoami')
+MyUName = MyUName.strip()
+
 ### Read list of usernames from the file defined in ${QtopUserNames} ###
 QtopUserFile = subprocess.check_output("echo ${QtopUserNames}",shell=True)
 QtopUserFile = QtopUserFile.strip()
@@ -45,6 +61,10 @@ for pair in UserList:
     diff = len(pair[0])-len(pair[1])
     for i in range(diff):
       pair[1] += " "
+  if (pair[0].strip() == MyUName):
+    pair[1] = ClrSet.User+pair[1]+ClrSet.Reset
+  else:
+    pair[1] = ClrSet.Group+pair[1]+ClrSet.Reset
 
 ### Read arguments ###
 RunType = ""
@@ -115,7 +135,7 @@ if ((RunType == "usr") or (RunType == "run")):
     if (RunType == "run"):
       line += "Active "
     line += "jobs for user "
-    line += QtopUser
+    line += ClrSet.User+QtopUser+ClrSet.Reset
     line += '\n'
     #Print qstat titles that will be lost
     line += "                                    "
@@ -169,7 +189,7 @@ if (RunType == "que"):
     #Print title
     line += '\n'
     line += "Active and queued jobs on "
-    line += QueName
+    line += ClrSet.Queue+QueName+ClrSet.Reset
     line += '\n'
     #Print qstat titles that will be lost
     line += "                                    "
