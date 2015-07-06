@@ -141,7 +141,7 @@ if ((RunType == "usr") or (RunType == "run")):
     if (RunType == "run"):
       line += "Active "
     line += "jobs for user "
-    line += ClrSet.User+QtopUser+ClrSet.Reset
+    line += ClrSet.Queue+QtopUser+ClrSet.Reset
     line += '\n'
     #Print qstat titles that will be lost
     line += "                                    "
