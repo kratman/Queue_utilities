@@ -4,16 +4,21 @@
 # A script to print all jobs for the current user                             #
 ###############################################################################
 
+#NB: Python 2.7 or higher is required.
+
 ### Import modules ###
 import subprocess
+import select
+import sys
+import os
 import re
 
 ### Set server information ###
-ServTag = "vpbs1"
+ServTag = "vpbs1" #Tag at the end of job id (e.g. 42424242.vpbs1)
 
 ### Find username ###
 MyUName = subprocess.check_output('whoami')
-MyUName = MyUName.strip()
+MyUName = MyUName.strip() #Remove white space
 
 ### Print a blank line ###
 print("")
@@ -23,8 +28,8 @@ jobcmd = "qstat -u "+MyUName
 JobOut = subprocess.check_output(jobcmd,shell=True)
 
 ### Alter qstat output ###
-JobOut = JobOut.strip()
-JobOut = JobOut.split('\n')
+JobOut = JobOut.strip() #White space from ends
+JobOut = JobOut.split('\n') #Separate lines
 for line in JobOut:
   if (line.strip() != (ServTag+':')):
     line = re.sub(r'\.vpbs1 ',r' ',line)
@@ -35,3 +40,4 @@ for line in JobOut:
 
 ### Clean up and exit ###
 print("")
+exit()

@@ -1,6 +1,9 @@
 Qtop:
--The quit command sometimes takes a second to register and typing "q" during
-a refresh does not quit the software. This is due to the 2 second windows I
-used to check for characters.
+-Functionality smartphone terminals may be limited or buggy. The $TERM
+environment variable should be xterm not linux and UTF-8 should be enabled.
 -Qtop is not as pretty or efficient as pbstop, but it was designed for
 systems that lack common tools.
+-Tests were performed on Gnome terminal, xterm, Konsole, and JuiceSSH.
+
+SCPpath:
+-Does not properly handle .. or ~/ in the paths.

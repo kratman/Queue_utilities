@@ -5,6 +5,8 @@
 # This is a simplified and specialized version of pbstop                      #
 ###############################################################################
 
+#NB: Python 2.7 or higher is required.
+
 #Usage: Qtop -q [ queue name ]
 #Usage: Qtop -u [ username ]
 #Usage: Qtop -r [ username ]
@@ -13,8 +15,8 @@
 import subprocess
 import select
 import sys
-import re
 import os
+import re
 
 ### Color settings ###
 class ClrSet:
@@ -131,9 +133,9 @@ if ((RunType == "usr") or (RunType == "run")):
     #Clear the screen
     #NB: Several different types are included since the commands
     #are terminal dependent
-    subprocess.call('clear')
-    subprocess.call('reset')
-    subprocess.call(['echo','-en','\e[3J'])
+    subprocess.call('clear') #Only prints blank lines (fallback)
+    subprocess.call('reset') #Gnome terminal, xterm
+    subprocess.call(['echo','-en','\e[3J']) #Konsole, xterm
     #Print title
     line = '\n'
     if (RunType == "usr"):
@@ -160,8 +162,8 @@ if ((RunType == "usr") or (RunType == "run")):
     jobcmd += " | grep -e "
     jobcmd += QtopUser
     JobOut = subprocess.check_output(jobcmd,shell=True)
-    JobOut = JobOut.strip()
-    JobOut = JobOut.split('\n')
+    JobOut = JobOut.strip() #Remove white space
+    JobOut = JobOut.split('\n') #Split lines
     #Replace names
     for line in JobOut:
       line = line.strip()
@@ -184,9 +186,9 @@ if (RunType == "que"):
     #Clear the screen
     #NB: Several different types are included since the commands
     #are terminal dependent
-    subprocess.call('clear')
-    subprocess.call('reset')
-    subprocess.call(['echo','-en','\e[3J'])
+    subprocess.call('clear') #Only prints blank lines (fallback)
+    subprocess.call('reset') #Gnome terminal, xterm
+    subprocess.call(['echo','-en','\e[3J']) #Konsole, xterm
     #Print qstat information for the queue
     print("")
     jobcmd = "qstat -Q "
@@ -212,8 +214,8 @@ if (RunType == "que"):
     jobcmd = "qstat -a | grep -e "
     jobcmd += QueName
     JobOut = subprocess.check_output(jobcmd,shell=True)
-    JobOut = JobOut.strip()
-    JobOut = JobOut.split('\n')
+    JobOut = JobOut.strip() #Remove white space
+    JobOut = JobOut.split('\n') #Split lines
     #Replace names
     for line in JobOut:
       line = line.strip()
