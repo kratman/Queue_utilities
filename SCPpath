@@ -19,9 +19,16 @@ if [[ "$1" == *"-h"* ]]; then
   exit
 fi
 
+#Print blank line
+echo ""
+
 #Print path
 scpuser=$(whoami)
 dirpath=$(pwd)
 fullpath=${scpuser}@${server}:${dirpath}
 fullpath=${fullpath}/${1}
 echo ${fullpath}
+
+#Print blank line
+echo ""
+exit

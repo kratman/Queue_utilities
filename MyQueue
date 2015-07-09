@@ -20,6 +20,9 @@ ServTag = "vpbs1" #Tag at the end of job id (e.g. 42424242.vpbs1)
 MyUName = subprocess.check_output('whoami')
 MyUName = MyUName.strip() #Remove white space
 
+### Clear screen ###
+subprocess.call('clear') #Only prints blank lines
+
 ### Print a blank line ###
 print("")
 
