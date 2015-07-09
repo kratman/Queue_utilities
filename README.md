@@ -47,6 +47,13 @@ A script to print the username, server, and path for scp or rsync.
 The currently the server name must be set in the script.
 
 ```
-user:$ SCPpath [ optional, path/file ]
+user:$ SCPpath [ optional, /path/to/file ]
 ```
 
+### CatSCP
+
+A script to run cat on a remote file.
+
+```
+user:$ CatSCP user@server:/path/to/file
+```

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+#Script script to use scp and cat on remote files.
+
+#Help mode
+if [[ "$1" == *"-h"* ]]; then
+  echo ""
+  echo "Runs cat on a remote file."
+  echo ""
+  echo "Usage:"
+  echo "       SCPpath <user@server:/path/to/file>"
+  echo ""
+  exit
+fi
+
+#Collect file and prompt for password
+scp $1 tmp_catscp.txt
+
+#Run cat
+cat tmp_catscp.txt
+
+#Remove tmp file
+rm -f tmp_catscp.txt
+
+#Done
+exit
