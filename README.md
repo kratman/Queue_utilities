@@ -26,7 +26,7 @@ user:$ Qtop --help
  --help, -h => print full help
 
 Pressing enter refreshes the output and pressing 'q' then enter exits Qtop.
-'''
+```
 
 NB: Python 2.7 or higher is required due to a change in the subprocess module.
 
