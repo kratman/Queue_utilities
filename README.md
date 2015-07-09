@@ -33,7 +33,7 @@ NB: Python 2.7 or higher is required due to a change in the subprocess module.
 ### MyQueue
 
 A script to print a list of running and queued jobs for the current
-user. The output is similar to 'Qtop -u me' with refreshing.
+user. The output is similar to 'Qtop -u me' without automatically refreshing.
 
 ```
 user:$ MyQueue
