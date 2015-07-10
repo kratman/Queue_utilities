@@ -136,6 +136,7 @@ if ((RunType == "usr") or (RunType == "run")):
     subprocess.call('clear') #Only prints blank lines (fallback)
     subprocess.call('reset') #Gnome terminal, xterm
     subprocess.call(['echo','-en','\e[3J']) #Konsole, xterm
+    subprocess.call('clear') #A second clear fixes a smartphone bug
     #Print title
     line = '\n'
     if (RunType == "usr"):
@@ -189,6 +190,7 @@ if (RunType == "que"):
     subprocess.call('clear') #Only prints blank lines (fallback)
     subprocess.call('reset') #Gnome terminal, xterm
     subprocess.call(['echo','-en','\e[3J']) #Konsole, xterm
+    subprocess.call('clear') #A second clear fixes a smartphone bug
     #Print qstat information for the queue
     print("")
     jobcmd = "qstat -Q "
