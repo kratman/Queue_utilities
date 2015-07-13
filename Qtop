@@ -76,20 +76,18 @@ for pair in UserList:
 RunType = ""
 if (len(sys.argv) == 2):
   RunArgs = sys.argv[1]
-  if (RunArgs > 1):
-    if ((RunArgs == "-h") or (RunArgs == "--help")):
-      RunType = "hlp"
+  if ((RunArgs == "-h") or (RunArgs == "--help")):
+    RunType = "hlp"
 if (len(sys.argv) == 3):
   RunArgs = sys.argv[1]
-  if (RunArgs > 1):
-    if ((RunArgs[0] == "-") and (RunArgs[1] == "h")):
-      RunType = "hlp"
-    if ((RunArgs[0] == "-") and (RunArgs[1] == "u")):
-      RunType = "usr"
-    if ((RunArgs[0] == "-") and (RunArgs[1] == "r")):
-      RunType = "run"
-    if ((RunArgs[0] == "-") and (RunArgs[1] == "q")):
-      RunType = "que"
+  if ((RunArgs[0] == "-") and (RunArgs[1] == "h")):
+    RunType = "hlp"
+  if ((RunArgs[0] == "-") and (RunArgs[1] == "u")):
+    RunType = "usr"
+  if ((RunArgs[0] == "-") and (RunArgs[1] == "r")):
+    RunType = "run"
+  if ((RunArgs[0] == "-") and (RunArgs[1] == "q")):
+    RunType = "que"
   RunArgs = sys.argv[2]
   if ((RunType == "usr") or (RunType == "run")):
     QtopUser = RunArgs
