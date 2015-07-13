@@ -3,7 +3,7 @@
 This repository contains a set of queue utility scripts for the scientific
 research groups.
 
-# Brief script documentation 
+## Brief script documentation 
 
 ### Qtop
 
