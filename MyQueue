@@ -8,9 +8,6 @@
 
 ### Import modules ###
 import subprocess
-import select
-import sys
-import os
 import re
 
 ### Set server information ###
