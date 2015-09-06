@@ -160,7 +160,10 @@ if ((RunType == "usr") or (RunType == "run")):
     jobcmd += QtopUser
     jobcmd += " | grep -e "
     jobcmd += QtopUser
-    JobOut = subprocess.check_output(jobcmd,shell=True)
+    try:
+      JobOut = subprocess.check_output(jobcmd,shell=True)
+    except:
+      JobOut = ""
     JobOut = JobOut.strip() #Remove white space
     JobOut = JobOut.split('\n') #Split lines
     #Replace names
@@ -213,7 +216,10 @@ if (RunType == "que"):
     #Call qstat
     jobcmd = "qstat -a | grep -e "
     jobcmd += QueName
-    JobOut = subprocess.check_output(jobcmd,shell=True)
+    try:
+      JobOut = subprocess.check_output(jobcmd,shell=True)
+    except:
+      JobOut = ""
     JobOut = JobOut.strip() #Remove white space
     JobOut = JobOut.split('\n') #Split lines
     #Replace names
