@@ -8,8 +8,8 @@ Queue Utilities Documentation
 ### Introduction
 
 This repository contains a set of queue utility scripts for the scientific
-research groups. These scripts are not intended to replace linux utilities,
-but rather to provide simplfied utilities for minimalist clusters.
+research groups. These scripts are not intended to replace Linux utilities,
+but rather to provide simplified utilities for minimalist clusters.
 
 ### Brief overview of the scripts
 

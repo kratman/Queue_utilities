@@ -1,9 +1,9 @@
 Qtop:
 -Functionality smartphone terminals may be limited or buggy. The $TERM
 environment variable should be xterm not linux and UTF-8 should be enabled.
--Qtop is not as pretty or efficient as pbstop, but it was designed for
-systems that lack common tools.
+-Qtop is not as pretty as pbstop, but it was designed for systems that lack
+common tools.
 -Tests were performed on Gnome terminal, xterm, Konsole, and JuiceSSH.
 
 SCPpath:
--Does not properly handle .. or ~/ in the paths.
+-Might not properly handle .. or ~/ in the paths.
