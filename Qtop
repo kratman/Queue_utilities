@@ -179,7 +179,7 @@ if ((RunType == "usr") or (RunType == "run")):
       #Read typed text
       quitline = sys.stdin.readline().strip()
       for letter in quitline:
-        if (letter == "q"):
+        if ((letter == "q") or (letter == "Q")):
           exit()
 
 ### Semi-infinite queue loop ###
@@ -235,7 +235,7 @@ if (RunType == "que"):
       #Read typed text
       quitline = sys.stdin.readline().strip()
       for letter in quitline:
-        if (letter == "q"):
+        if ((letter == "q") or (letter == "Q")):
           exit()
 
 ### Exit if no valid input was found ###
