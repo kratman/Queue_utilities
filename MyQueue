@@ -40,4 +40,4 @@ for line in JobOut:
 
 ### Clean up and exit ###
 print("")
-exit()
+exit(0)

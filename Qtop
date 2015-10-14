@@ -123,7 +123,7 @@ if (RunType == "hlp"):
   print("")
   print("Note: Behavior can be terminal dependent.")
   print(ClrSet.Reset)
-  exit()
+  exit(0)
 
 ### Semi-infinite user loop ###
 if ((RunType == "usr") or (RunType == "run")):
@@ -180,7 +180,7 @@ if ((RunType == "usr") or (RunType == "run")):
       quitline = sys.stdin.readline().strip()
       for letter in quitline:
         if ((letter == "q") or (letter == "Q")):
-          exit()
+          exit(0)
 
 ### Semi-infinite queue loop ###
 if (RunType == "que"):
@@ -236,7 +236,7 @@ if (RunType == "que"):
       quitline = sys.stdin.readline().strip()
       for letter in quitline:
         if ((letter == "q") or (letter == "Q")):
-          exit()
+          exit(0)
 
 ### Exit if no valid input was found ###
 print("")
@@ -246,4 +246,4 @@ print("Usage: Qtop -r [ username name ]")
 print("")
 print("Use -h for more detailed help.")
 print("")
-exit()
+exit(0)
