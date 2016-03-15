@@ -42,6 +42,7 @@ NB: Python 2.7 or higher is required due to a change in the subprocess module.
 
 A script to print a list of running and queued jobs for the current
 user. The output is similar to 'Qtop -u me' without automatically refreshing.
+The currently the server name must be set in the script.
 
 ```
 user:$ MyQueue
