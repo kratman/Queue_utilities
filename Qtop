@@ -165,6 +165,8 @@ if ((RunType == "usr") or (RunType == "run")):
     jobcmd += QtopUser
     jobcmd += " | grep -e "
     jobcmd += QtopUser
+    if (RunType == "run"):
+      jobcmd += " | grep -e ' R '"
     try:
       JobOut = subprocess.check_output(jobcmd,shell=True)
     except:
