@@ -43,6 +43,7 @@ QtopUserFile = subprocess.check_output("echo ${QtopUserNames}",shell=True)
 QtopUserFile = QtopUserFile.strip()
 UserList = []
 ServerTag = ""
+ServerRep = ""
 if (len(QtopUserFile) > 1):
   if (os.path.isfile(QtopUserFile)):
     ifile = open(QtopUserFile,"r")
@@ -51,7 +52,11 @@ if (len(QtopUserFile) > 1):
       dummy[i] = dummy[i].split()
       if (dummy[i][0] == "Server:"):
         #Sanitize the server tag
-        ServerTag = re.escape(dummy[i][1])
+        ServerTag = dummy[i][1]
+        servdifflen = abs(len(ServerTag)-6)
+        for j in range(servdifflen):
+          ServerRep += " "
+        ServerTag = re.escape(ServerTag)
       else:
         UserList.append(dummy[i])
 
@@ -170,7 +175,7 @@ if ((RunType == "usr") or (RunType == "run")):
     for line in JobOut:
       line = line.strip()
       for i in range(len(UserList)):
-        line = re.sub((r''+ServerTag),(r''),line)
+        line = re.sub((r''+ServerTag),(r''+ServerRep),line)
         line = re.sub((r''+UserList[i][0]),(r''+UserList[i][1]),line)
       print(line)
     #Check for quit commad every 30 seconds
@@ -226,7 +231,7 @@ if (RunType == "que"):
     for line in JobOut:
       line = line.strip()
       for i in range(len(UserList)):
-        line = re.sub((r''+ServerTag),(r''),line)
+        line = re.sub((r''+ServerTag),(r''+ServerRep),line)
         line = re.sub((r''+UserList[i][0]),(r''+UserList[i][1]),line)
       print(line)
     #Check for quit commad every 30 seconds

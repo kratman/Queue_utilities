@@ -27,12 +27,18 @@ print("")
 jobcmd = "qstat -u "+MyUName
 JobOut = subprocess.check_output(jobcmd,shell=True)
 
+### Fix alignment ###
+ServRep = "  "
+servdifflen = abs(len(ServTag)-6)
+for i in range(servdifflen):
+  ServRep += " "
+
 ### Alter qstat output ###
 JobOut = JobOut.strip() #White space from ends
 JobOut = JobOut.split('\n') #Separate lines
 for line in JobOut:
   if (line.strip() != (ServTag+':')):
-    line = re.sub((r'\.'+ServTag+' '),r' ',line)
+    line = re.sub((r'\.'+ServTag+' '),(r''+ServRep),line)
     line = re.sub(r'Job ID         ',r'Job ID   ',line)
     line = re.sub(r'---------------',r'---------',line)
     line = re.sub(r'              Req',r'        Req',line)
