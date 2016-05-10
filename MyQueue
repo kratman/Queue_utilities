@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 ###############################################################################
 # A script to print all jobs for the current user                             #
@@ -15,7 +15,7 @@ ServTag = "vpbs2.g" #Tag at the end of job id (e.g. 42424242.vpbs1)
 
 ### Find username ###
 MyUName = subprocess.check_output('whoami')
-MyUName = MyUName.strip() #Remove white space
+MyUName = MyUName.decode('utf-8').strip() #Remove white space
 
 ### Clear screen ###
 subprocess.call('clear') #Only prints blank lines
@@ -25,7 +25,7 @@ print("")
 
 ### Call qstat ###
 jobcmd = "qstat -u "+MyUName
-JobOut = subprocess.check_output(jobcmd,shell=True)
+JobOut = subprocess.check_output(jobcmd,shell=True).decode('utf-8')
 
 ### Fix alignment ###
 ServRep = "  "

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 ###############################################################################
 # A simple program to produce a constantly updating queue t.o.p.              #
@@ -36,11 +36,11 @@ class ClrSet:
 
 ### Find current users ID ###
 MyUName = subprocess.check_output('whoami')
-MyUName = MyUName.strip()
+MyUName = MyUName.decode('utf-8').strip()
 
 ### Read list of usernames from the file defined in ${QtopUserNames} ###
 QtopUserFile = subprocess.check_output("echo ${QtopUserNames}",shell=True)
-QtopUserFile = QtopUserFile.strip()
+QtopUserFile = QtopUserFile.decode('utf-8').strip()
 UserList = []
 ServerTag = ""
 ServerRep = ""
@@ -99,7 +99,7 @@ if (len(sys.argv) == 3):
     QtopUser = QtopUser.strip()
     if (RunArgs == "me"):
       QtopUser = subprocess.check_output('whoami')
-      QtopUser = QtopUser.strip()
+      QtopUser = QtopUser.decode('utf-8').strip()
   if (RunType == "que"):
     #Read and sanitize the queue name
     QueName = re.escape(RunArgs)
@@ -171,7 +171,7 @@ if ((RunType == "usr") or (RunType == "run")):
       JobOut = subprocess.check_output(jobcmd,shell=True)
     except:
       JobOut = ""
-    JobOut = JobOut.strip() #Remove white space
+    JobOut = JobOut.decode('utf-8').strip() #Remove white space
     JobOut = JobOut.split('\n') #Split lines
     #Replace names
     for line in JobOut:
@@ -203,7 +203,7 @@ if (RunType == "que"):
     print("")
     jobcmd = "qstat -Q "
     jobcmd += QueName
-    line = subprocess.check_output(jobcmd,shell=True)
+    line = subprocess.check_output(jobcmd,shell=True).decode('utf-8')
     #Print title
     line += '\n'
     line += "Active and queued jobs on "
@@ -227,7 +227,7 @@ if (RunType == "que"):
       JobOut = subprocess.check_output(jobcmd,shell=True)
     except:
       JobOut = ""
-    JobOut = JobOut.strip() #Remove white space
+    JobOut = JobOut.decode('utf-8').strip() #Remove white space
     JobOut = JobOut.split('\n') #Split lines
     #Replace names
     for line in JobOut:
