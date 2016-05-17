@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Script script to use scp and cat on remote files.
+#Script script to use cat on remote files.
 
 #Help mode
 if [[ "$1" == *"-h"* ]]; then

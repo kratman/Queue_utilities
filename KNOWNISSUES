@@ -6,4 +6,4 @@ common tools.
 -Tests were performed on Gnome terminal, xterm, Konsole, and JuiceSSH.
 
 SCPpath:
--Might not properly handle .. or ~/ in the paths.
+-Might not properly handle * or ~/ in the paths.
